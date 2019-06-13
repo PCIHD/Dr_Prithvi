@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -15,18 +16,46 @@ import android.widget.TextView;
 
 public class Frag2 extends Fragment {
     @Nullable
-    @Override
+
+    private BottomSheetBehavior mBottomSheetBehavior;
+    private TextView mTextViewState;
+    private ImageView Bottom_sheet_arrow;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View view = inflater.inflate(R.layout.frag2_layout , container , false);
+        Bottom_sheet_arrow = (ImageView) view.findViewById(R.id.bottom_sheet_arrow);
 
+        mBottomSheetBehavior =  BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet));
+        mBottomSheetBehavior.setBottomSheetCallback(
+                new BottomSheetBehavior.BottomSheetCallback() {
+                    @Override
+                    public void onStateChanged(@NonNull View view, int new_state) {
+                        switch (new_state) {
+                            case BottomSheetBehavior.STATE_EXPANDED: {
+                                Bottom_sheet_arrow.setImageResource(R.drawable.icn_chevron_down);
+                                break;
+                            }
+                            case BottomSheetBehavior.STATE_COLLAPSED:
+                                Bottom_sheet_arrow.setImageResource(R.drawable.icn_chevron_up);
+                                break;
 
+                            case BottomSheetBehavior.STATE_DRAGGING:
+                            {
+                                Bottom_sheet_arrow.setImageResource(R.drawable.ic_drag_handle_black_24dp);
+                            }
+                        }
+                    }
 
+                    @Override
+                    public void onSlide(@NonNull View view, float v) {
+
+                    }
+                }
+        );
         return view;
     }
 
 
-    private BottomSheetBehavior mBottomSheetBehavior;
-    private TextView mTextViewState;
+
 
    /* @Override
     public void onCreate(Bundle savedInstanceState) {
