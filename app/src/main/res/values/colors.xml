@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF6E40</color>
-    <color name="colorPrimaryDark">#D85E3D</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#98999b</color>
+    <color name="colorPrimaryDark">#404041</color>
+    <color name="colorAccent">#d2d0d1</color>
+    <color name="semi_transparent">#66000000</color>
+    <color name = "Bottom_Sheet_color">#FFFFFF  </color>
 </resources>

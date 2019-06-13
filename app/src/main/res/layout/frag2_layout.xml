@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     >
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
@@ -40,11 +42,11 @@
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:background="@android:color/holo_blue_light"
+        android:background="@drawable/bottom_sheet_bg"
         app:behavior_hideable="false"
         app:behavior_peekHeight="30dp"
+        android:padding="4dp"
         app:layout_behavior="@string/bottom_sheet_behavior">
-
 
 
         <LinearLayout
@@ -57,7 +59,7 @@
 
             <ImageView
                 android:id="@+id/bottom_sheet_arrow"
-                android:layout_width="wrap_content"
+                android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:src="@drawable/icn_chevron_up" />
@@ -70,6 +72,7 @@
             This is a Bottom Sheet\nThis is a Bottom Sheet\n\nThis is a Bottom Sheet\n\nThis is a Bottom Sheet\n\n
             This is a Bottom Sheet\n\nThis is a Bottom Sheet\n\nThis is a Bottom Sheet\n\n"
                 android:textSize="10sp" />
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
