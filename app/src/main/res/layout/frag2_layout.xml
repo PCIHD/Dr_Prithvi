@@ -14,28 +14,13 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <!--
-        <Button
-            android:id="@+id/button_expand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="expand" />
 
-        <Button
-            android:id="@+id/button_collapse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="collapse" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/camera_frame">
 
-        <TextView
-            android:id="@+id/text_view_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="State"
-            android:textColor="@android:color/black"
-            android:textSize="30sp" />
-        -->
+        </FrameLayout>
     </LinearLayout>
 
     <android.support.v4.widget.NestedScrollView
