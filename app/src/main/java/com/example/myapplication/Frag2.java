@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.content.Context;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,14 +19,17 @@ import android.widget.TextView;
 
 public class Frag2 extends Fragment {
     @Nullable
-
+    private FrameLayout frameLayout;
     private BottomSheetBehavior mBottomSheetBehavior;
     private TextView mTextViewState;
     private ImageView Bottom_sheet_arrow;
+    private Camera camera;
+    private Show_Camera showCamera;
+    private View view;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.frag2_layout , container , false);
+        view = inflater.inflate(R.layout.frag2_layout , container , false);
         Bottom_sheet_arrow = (ImageView) view.findViewById(R.id.bottom_sheet_arrow);
-
+        frameLayout = (FrameLayout) view.findViewById(R.id.camera_frame);
         mBottomSheetBehavior =  BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet));
         mBottomSheetBehavior.setBottomSheetCallback(
                 new BottomSheetBehavior.BottomSheetCallback() {
@@ -45,12 +51,18 @@ public class Frag2 extends Fragment {
                         }
                     }
 
+
                     @Override
                     public void onSlide(@NonNull View view, float v) {
 
                     }
                 }
         );
+        camera = Camera.open();
+        Context context = view.getContext();
+
+        showCamera = new Show_Camera( context, camera);
+        frameLayout.addView(showCamera);
         return view;
     }
 
