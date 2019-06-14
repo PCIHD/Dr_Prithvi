@@ -34,7 +34,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import org.tensorflow.lite.Interpreter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,7 +53,6 @@ public class Frag2 extends Fragment {
     private CameraDevice cameraDevice;
     private Show_Camera showCamera;
     private View view;
-   // private Interpreter tflite;
     private ImageButton capturebutton;
     private String cameraId;
     private CameraCaptureSession cameraCaptureSessions;
