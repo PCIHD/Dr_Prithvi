@@ -5,7 +5,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
-import android.graphics.ImageFormat;
+import android.content.res.AssetFileDescriptor;
+import android.graphics.Bitmap;
 import android.graphics.SurfaceTexture;
 
 import android.hardware.camera2.CameraAccessException;
@@ -13,14 +14,10 @@ import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
-import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
-import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
-import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
@@ -28,7 +25,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -43,16 +39,21 @@ import android.widget.Toast;
 
 import org.tensorflow.lite.Interpreter;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
-import java.util.UUID;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 
 public class Frag2 extends Fragment {
@@ -72,7 +73,18 @@ public class Frag2 extends Fragment {
     private HandlerThread mBackgroundThread;
     private CameraCaptureSession cameraCaptureSessions;
     private Interpreter tflite;
-    private List<String> labelList;
+    private final Interpreter.Options tfliteOptions = new Interpreter.Options();
+    private List<String> labelList  = null;
+
+    private String[] topLabels = null;
+    private String[] topConfidence = null;
+     private int DIM_IMG_SIZE_X = 160;
+    private int DIM_IMG_SIZE_Y = 160;
+    private int DIM_PIXEL_SIZE = 3;
+    private int intValues[];
+    private static final int RESULTS_TO_SHOW = 1;
+    private float[][] labelProbArray = null;
+
 
 
 
@@ -90,6 +102,10 @@ public class Frag2 extends Fragment {
         ORIENTATIONS.append(Surface.ROTATION_180, 270);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
+    private ByteBuffer imgData = null;
+
+    private static final int IMAGE_MEAN = 128;
+    private static final float IMAGE_STD = 128.0f;
 
     private Activity activity;
     private CameraCaptureSession cameraCaptureSession;
@@ -112,6 +128,16 @@ public class Frag2 extends Fragment {
         }
     };
 
+    private PriorityQueue<Map.Entry<String, Float>> sortedLabels =
+            new PriorityQueue<>(
+                    RESULTS_TO_SHOW,
+                    new Comparator<Map.Entry<String, Float>>() {
+                        @Override
+                        public int compare(Map.Entry<String, Float> o1, Map.Entry<String, Float> o2) {
+                            return (o1.getValue()).compareTo(o2.getValue());
+                        }
+                    });
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -122,6 +148,11 @@ public class Frag2 extends Fragment {
         textureView = (TextureView) view.findViewById(R.id.texture_View);
         capturebutton = (ImageButton) view.findViewById(R.id.capture);
         mBottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet));
+
+
+
+
+
         mBottomSheetBehavior.setBottomSheetCallback(
                 new BottomSheetBehavior.BottomSheetCallback() {
                     @Override
@@ -147,8 +178,40 @@ public class Frag2 extends Fragment {
 
                     }
                 }
+
+
+
         );
         textureView.setSurfaceTextureListener(textureListener);
+
+        capturebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bitmap image = takePicture();
+
+                
+                Toast.makeText(activity,"picture liya",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        try{
+            tflite = new Interpreter(loadModelFile(), tfliteOptions);
+            labelList = loadLabelList();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        intValues = new int[DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y];
+        imgData =
+                ByteBuffer.allocateDirect(
+                        4 * DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y * DIM_PIXEL_SIZE);
+        imgData.order(ByteOrder.nativeOrder());
+
+
+
+
+
+
+
         return view;
 
 
@@ -213,108 +276,24 @@ public class Frag2 extends Fragment {
 
 
     }
-    private void takePicture() {
-        if(cameraDevice == null)
-            return;
-        CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
-        try{
-            CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraDevice.getId());
-            Size[] jpegSizes = null;
-            if(characteristics != null)
-                jpegSizes = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
-                        .getOutputSizes(ImageFormat.JPEG);
-
-            //Capture image with custom size
-            int width = 640;
-            int height = 480;
-            if(jpegSizes != null && jpegSizes.length > 0)
-            {
-                width = jpegSizes[0].getWidth();
-                height = jpegSizes[0].getHeight();
-            }
-            final ImageReader reader = ImageReader.newInstance(width,height,ImageFormat.JPEG,1);
-            List<Surface> outputSurface = new ArrayList<>(2);
-            outputSurface.add(reader.getSurface());
-            outputSurface.add(new Surface(textureView.getSurfaceTexture()));
-
-            final CaptureRequest.Builder captureBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
-            captureBuilder.addTarget(reader.getSurface());
-            captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
-
-            //Check orientation base on device
-            int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
-            captureBuilder.set(CaptureRequest.JPEG_ORIENTATION,ORIENTATIONS.get(rotation));
-
-            file = new File(Environment.getExternalStorageDirectory()+"/"+ UUID.randomUUID().toString()+".jpg");
-            ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
-                @Override
-                public void onImageAvailable(ImageReader imageReader) {
-                    Image image = null;
-                    try{
-                        image = reader.acquireLatestImage();
-                        ByteBuffer buffer = image.getPlanes()[0].getBuffer();
-                        byte[] bytes = new byte[buffer.capacity()];
-                        buffer.get(bytes);
-                        save(bytes);
-
-                    }
-                    catch (FileNotFoundException e)
-                    {
-                        e.printStackTrace();
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                    finally {
-                        {
-                            if(image != null)
-                                image.close();
-                        }
-                    }
-                }
-                private void save(byte[] bytes) throws IOException {
-                    OutputStream outputStream = null;
-                    try{
-                        outputStream = new FileOutputStream(file);
-                        outputStream.write(bytes);
-                    }finally {
-                        if(outputStream != null)
-                            outputStream.close();
-                    }
-                }
-            };
-
-            reader.setOnImageAvailableListener(readerListener,mBackgroundHandler);
-            final CameraCaptureSession.CaptureCallback captureListener = new CameraCaptureSession.CaptureCallback() {
-                @Override
-                public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
-                    super.onCaptureCompleted(session, request, result);
-                    Toast.makeText(activity, "Saved "+file, Toast.LENGTH_SHORT).show();
-                    createCameraPreview();
-                }
-            };
-
-            cameraDevice.createCaptureSession(outputSurface, new CameraCaptureSession.StateCallback() {
-                @Override
-                public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession) {
-                    try{
-                        cameraCaptureSession.capture(captureBuilder.build(),captureListener,mBackgroundHandler);
-                    } catch (CameraAccessException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onConfigureFailed(@NonNull CameraCaptureSession cameraCaptureSession) {
-
-                }
-            },mBackgroundHandler);
 
 
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
-        }
+    private MappedByteBuffer loadModelFile() throws IOException {
+        AssetFileDescriptor fileDescriptor = getContext().getAssets().openFd("dr_prithvi.tflite");
+        FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
+        FileChannel fileChannel = inputStream.getChannel();
+        long startOffset = fileDescriptor.getStartOffset();
+        long declaredLength = fileDescriptor.getDeclaredLength();
+        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
+    }
+
+
+
+
+    private Bitmap takePicture() {
+        Bitmap bitmapTextureView = textureView.getBitmap();
+        bitmapTextureView = Bitmap.createScaledBitmap(bitmapTextureView,DIM_IMG_SIZE_X,DIM_IMG_SIZE_Y,false);
+        return bitmapTextureView;
     }
 
     private void createCameraPreview() {
@@ -445,6 +424,17 @@ public class Frag2 extends Fragment {
         mBackgroundThread = new HandlerThread("Camera Background");
         mBackgroundThread.start();
         mBackgroundHandler = new Handler(mBackgroundThread.getLooper());
+    }
+    private List<String> loadLabelList() throws IOException {
+        List<String> labelList = new ArrayList<String>();
+        BufferedReader reader =
+                new BufferedReader(new InputStreamReader(getContext().getAssets().open("labels.txt")));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            labelList.add(line);
+        }
+        reader.close();
+        return labelList;
     }
 
 }
