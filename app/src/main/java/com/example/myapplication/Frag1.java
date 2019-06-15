@@ -18,7 +18,7 @@ public class Frag1 extends Fragment {
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        String[] menuItems = {"APPLE_SCAB","APPLE_BLACK_ROT"};
+        String[] menuItems = {"APPLE","BLUEBERRY","CHERRY"};
         View view = inflater.inflate(R.layout.frag1_layout , container , false);
         Activity activity = getActivity();
         listView = (LinearLayout)view.findViewById(R.id.listView1);
@@ -65,10 +65,10 @@ public class Frag1 extends Fragment {
         ImageView Cherry = new ImageView(activity);
         Cherry.setImageResource(R.drawable.cherry);
         Cherry.setContentDescription("Cherry");
-        Blueberry.setOnClickListener(new View.OnClickListener() {
+        Cherry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), Blue2.class);
+                Intent i = new Intent(getActivity(), cherry2.class);
                 startActivity(i);
 
             }
@@ -78,10 +78,10 @@ public class Frag1 extends Fragment {
         ImageView Corn = new ImageView(activity);
         Corn.setImageResource(R.drawable.corn);
         Corn.setContentDescription("Corn");
-        Blueberry.setOnClickListener(new View.OnClickListener() {
+        Corn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), Blue2.class);
+                Intent i = new Intent(getActivity(), corn2.class);
                 startActivity(i);
 
             }
@@ -91,10 +91,10 @@ public class Frag1 extends Fragment {
         ImageView Grapes = new ImageView(activity);
         Grapes.setImageResource(R.drawable.grapes);
         Grapes.setContentDescription("Grapes");
-        Blueberry.setOnClickListener(new View.OnClickListener() {
+        Grapes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), Blue2.class);
+                Intent i = new Intent(getActivity(), grape2.class);
                 startActivity(i);
 
             }
@@ -104,20 +104,72 @@ public class Frag1 extends Fragment {
         ImageView Orange = new ImageView(activity);
         Orange.setImageResource(R.drawable.orange);
         Orange.setContentDescription("Orange");
-        Blueberry.setOnClickListener(new View.OnClickListener() {
+        Orange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), Blue2.class);
+                Intent i = new Intent(getActivity(), orange2.class);
                 startActivity(i);
 
             }
         });
         listView.addView(Orange);
 
-/*
+        ImageView Peach = new ImageView(activity);
+        Peach.setImageResource(R.drawable.peach2);
+        Peach.setContentDescription("Peach");
+        Peach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), peach2.class);
+                startActivity(i);
+
+            }
+        });
+        listView.addView(Peach);
+        ImageView Pepper = new ImageView(activity);
+        Pepper.setImageResource(R.drawable.pepper);
+        Pepper.setContentDescription("Pepper");
+        Pepper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), pepper2.class);
+                startActivity(i);
+
+            }
+        });
+        listView.addView(Pepper);
+
+        ImageView Potato = new ImageView(activity);
+        Potato.setImageResource(R.drawable.potato);
+        Potato.setContentDescription("Potato");
+        Potato.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), potato2.class);
+                startActivity(i);
+
+            }
+        });
+        listView.addView(Potato);
+
+        ImageView Raspberry = new ImageView(activity);
+        Raspberry.setImageResource(R.drawable.raspberry);
+        Raspberry.setContentDescription("Raspberry");
+        Raspberry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), raspberry2.class);
+                startActivity(i);
+
+            }
+        });
+        listView.addView(Raspberry);
 
 
 
+
+
+        /*
 
         // Define string array.
         String[] listValue = new String[] {"ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT"};

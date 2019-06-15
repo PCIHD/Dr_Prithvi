@@ -13,7 +13,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Blue2"></activity>
+        <activity android:name=".raspberry2"></activity>
+        <activity android:name=".potato2" />
+        <activity android:name=".pepper2" />
+        <activity android:name=".peach2" />
+        <activity android:name=".orange2" />
+        <activity android:name=".grape2" />
+        <activity android:name=".corn2" />
+        <activity android:name=".cherry2" />
+        <activity android:name=".Blue2" />
         <activity android:name=".apple" />
         <activity android:name=".tomato" />
         <activity android:name=".Tomato_Activity" />
