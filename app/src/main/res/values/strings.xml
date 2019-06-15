@@ -24,11 +24,17 @@ Infected fruit may drop from the plant
     Infected fruit becomes distorted and may crack allowing entry of secondary organism.
 </string>
 
-    <string name="Apple"> APPLE SCAB
+    <string name="Blueberry"> Alternaria Leaf Spot of Blueberry
+Alternaria Leaf Spot (Alternaria tenuissima) occurs primarily in the spring during prolonged periods of cool wet weather, when spores are produced in abundance. Leaf symptoms appear as circular to irregular-shaped brown to gray lesions surrounded by a red border. Prolonged periods of high humidity favor disease development.
+Bacterial Leaf Scorch of Blueberry
+The bacterium Xylella fastidiosa is the causal agent of bacterial leaf scorch of blueberry, which primarily affects cultivars of southern highbush blueberries(interspecific hybrids of Vaccinium corymbosum).
+Symptoms on southern highbush blueberries include: marginal scorching of the leaves, premature leaf drop, yellowing of stems and eventual death of the plants.
+Double Spot and Gloeocercospora Leaf Spot
+In late summer, the double spot fungus develops a secondary necrotic area around the original lesion spreading in an irregular to fan-shaped pattern. The gloeocercospora leaf spot appears on the foliage by mid-summer as large dark brown, circular to angular lesions surrounded by a dark border.
+Leaf Rust of Blueberry
+•	The disease first appears as yellow leaf spots on the upper leaf surface of new blueberry leaves.
+•	Spots later turn reddish brown. Entire leaves may turn brown, die and drop prematurely if infections are severe.
+•	Yellowish orange pustules become visible on the lower leaf surface about mid-summer. This disease also occurs sporadically on highbush blueberries after harvest.
 
-    Symptoms on fruit are similar to those found on leaves.
-    Scabby spots are sunken and tan and may have velvety spores in the center.
-    As these spots mature, they become larger and turn brown and corky.
-    Infected fruit becomes distorted and may crack allowing entry of secondary organism.
 </string>
 </resources>
