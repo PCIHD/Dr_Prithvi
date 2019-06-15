@@ -51,7 +51,15 @@ public class Frag1 extends Fragment {
 
         ImageView Blueberry = new ImageView(activity);
         Blueberry.setImageResource(R.drawable.blueberry);
-        Blueberry.setContentDescription("");
+        Blueberry.setContentDescription("Blueberry");
+        Blueberry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), Blue2.class);
+                startActivity(i);
+
+            }
+        });
         listView.addView(Blueberry);
 
         ImageView Cherry = new ImageView(activity);

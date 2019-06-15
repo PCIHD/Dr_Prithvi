@@ -3,4 +3,32 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
+    <string name="Tomato"> <b>APPLE SCAB</b>
+\n TOMATO EARLY BLIGHT
+LEAVES:
+Initially small dark spots form on older foliage near the ground
+Leaf spots are round, brown and can grow up to half inch in diameter.
+Larger spots have target like concentric rings and tissue around spots often turns yellow
+Severely infected leaves turn brown and fall off, or dead, dried leaves may cling to the stem
+FRUIT:
+Fruit can be infected at any stage of maturity
+Fruit spots are leathery, black, with raised concentric ridges and generally occur near the stem
+Infected fruit may drop from the plant
+</string>
+
+    <string name="Apple"> APPLE SCAB
+
+    Symptoms on fruit are similar to those found on leaves.
+    Scabby spots are sunken and tan and may have velvety spores in the center.
+    As these spots mature, they become larger and turn brown and corky.
+    Infected fruit becomes distorted and may crack allowing entry of secondary organism.
+</string>
+
+    <string name="Apple"> APPLE SCAB
+
+    Symptoms on fruit are similar to those found on leaves.
+    Scabby spots are sunken and tan and may have velvety spores in the center.
+    As these spots mature, they become larger and turn brown and corky.
+    Infected fruit becomes distorted and may crack allowing entry of secondary organism.
+</string>
 </resources>
