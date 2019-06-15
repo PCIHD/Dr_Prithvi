@@ -66,14 +66,33 @@
                 android:layout_gravity="center"
                 android:src="@drawable/icn_chevron_up" />
 
+
+            <ImageView
+                android:id="@+id/bottom_img"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
+                android:layout_gravity="left"
+                android:src="@drawable/apple___healthy" />
+
             <TextView
+                android:id="@+id/bottom_var"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif"
                 android:padding="16dp"
-                android:text="This is a Bottom Sheet\n\nThis is a Bottom Sheet\n\nThis is a Bottom Sheet\n\n
-            This is a Bottom Sheet\nThis is a Bottom Sheet\n\nThis is a Bottom Sheet\n\nThis is a Bottom Sheet\n\n
-            This is a Bottom Sheet\n\nThis is a Bottom Sheet\n\nThis is a Bottom Sheet\n\n"
-                android:textSize="10sp" />
+                android:text="CLASSIFIED :- "
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/bottom_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="monospace"
+                android:padding="16dp"
+                android:text="apple___healthy"
+                android:textSize="16sp" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

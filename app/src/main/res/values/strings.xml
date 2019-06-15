@@ -3,4 +3,112 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
+    <string name="Tomato"> <b><i>1. TOMATO BACTERIAL SPOT</i></b>
+\n It is difficult to reliably distinguish bacterial spot from bacterial speck based on visual symptoms, especially in the early stages.
+Initial leaf symptoms are small, circular-to-irregular, dark lesions, which may be surrounded by a yellow halo.
+The lesions tend to concentrate on the leaf edges and tip and may increase in size to a diameter of 3-5 mm. Infected leaves may develop a scorched appearance.
+When spots are numerous, foliage turns yellow and eventually dies, leading to defoliation of the lower portion of the plant.
+
+TOMATO EARLY BLIGHT
+LEAVES:
+Initially small dark spots form on older foliage near the ground
+Leaf spots are round, brown and can grow up to half inch in diameter.
+Larger spots have target like concentric rings and tissue around spots often turns yellow
+Severely infected leaves turn brown and fall off, or dead, dried leaves may cling to the stem
+FRUIT:
+Fruit can be infected at any stage of maturity
+Fruit spots are leathery, black, with raised concentric ridges and generally occur near the stem
+Infected fruit may drop from the plant
+https://extension.umn.edu/diseases/early-blight-tomato
+
+</string>
+
+    <string name="Apple"> APPLE SCAB
+
+    Symptoms on fruit are similar to those found on leaves.
+    Scabby spots are sunken and tan and may have velvety spores in the center.
+    As these spots mature, they become larger and turn brown and corky.
+    Infected fruit becomes distorted and may crack allowing entry of secondary organism.
+</string>
+
+    <string name="Blueberry"> Alternaria Leaf Spot of Blueberry
+Alternaria Leaf Spot (Alternaria tenuissima) occurs primarily in the spring during prolonged periods of cool wet weather, when spores are produced in abundance. Leaf symptoms appear as circular to irregular-shaped brown to gray lesions surrounded by a red border. Prolonged periods of high humidity favor disease development.
+Bacterial Leaf Scorch of Blueberry
+The bacterium Xylella fastidiosa is the causal agent of bacterial leaf scorch of blueberry, which primarily affects cultivars of southern highbush blueberries(interspecific hybrids of Vaccinium corymbosum).
+Symptoms on southern highbush blueberries include: marginal scorching of the leaves, premature leaf drop, yellowing of stems and eventual death of the plants.
+Double Spot and Gloeocercospora Leaf Spot
+In late summer, the double spot fungus develops a secondary necrotic area around the original lesion spreading in an irregular to fan-shaped pattern. The gloeocercospora leaf spot appears on the foliage by mid-summer as large dark brown, circular to angular lesions surrounded by a dark border.
+Leaf Rust of Blueberry
+•	The disease first appears as yellow leaf spots on the upper leaf surface of new blueberry leaves.
+•	Spots later turn reddish brown. Entire leaves may turn brown, die and drop prematurely if infections are severe.
+        •	Yellowish orange pustules become visible on the lower leaf surface about mid-summer. This disease also occurs sporadically on highbush blueberries after harvest.</string>
+
+    <string name="Cherry">CHERRY POWDERY MILDEW
+            Initial symptoms, often occurring 7 to 10 days after the onset of the first irrigation, are light roughly-circular, powdery looking patches on young, susceptible leaves (newly unfolded, and light green expanding leaves).
+
+            Older leaves develop an age-related (ontogenic) resistance to powdery mildew and are naturally more resistant to infection than younger leaves.
+
+            Look for early leaf infections on root suckers, the interior of the canopy or the crotch of the tree where humidity is high.
+        </string>
+    <string name="Corn">Cercospora leaf spot Gray leaf spot
+    COMMON RUST
+    NOTHERN LEAF BLIGHT
+        Early lesions of gray leaf spot are small, necrotic spots and may have a chlorotic halo (more visible when leaf is backlit)
+Initially lesions may be tan or brown before fungal sporulation begins
+•	Lesions progress from lower to upper leaves
+•	Typical lesions of gray leaf spot are rectangular with straight edges
+•	Grayish color of lesions is due to sporulation of the pathogen
+    </string>
+
+    <string name="Grapes">Black_rot
+ Esca Black_Measles
+ Leaf blight Isariopsis Leaf Spot
+ Grape healthy
+     LEAVES:
+Reddish brown and circular to angular spots appear on the upper surface of the leaves starting in late spring.
+As spots merge, they form irregular, reddish brown blotches.
+The center of the leaf spot turns tannish brown and is surrounded by a black margin.
+Black, speck-sized fruiting bodies (pycnidia) are arranged in a definite ring just inside the margin of the lesion. Only young, rapidly growing leaves are affected.
+FRUIT:
+A small spot will appear that becomes circular and whitish tan, often surrounded by a brown ring.This happens while the berry is still green.
+The spots grow rapidly and may cover half of the berry within 48 hours.
+Within a few days the entire berry becomes coal black, hard, and mummified.
+The surface of the withered fruit is soon covered with minute, black, pimple-like, that are arranged in circular zones.
+ </string>
+
+    <string name="Orange">Haunglongbing Citrus greening
+    HLB is distinguished by the common symptoms of yellowing of the veins and adjacent tissues; followed by splotchy mottling of the entire leaf, premature defoliation, dieback of twigs, decay of feeder rootlets and lateral roots, and decline in vigor, ultimately followed by the death of the entire plant.
+Affected trees have stunted growth, bear multiple off-season flowers (most of which fall off), and produce small, irregularly shaped fruit with a thick, pale peel that remains green at the bottom and tastes very bitter.
+Nutrient deficiencies tend to be symmetrical along the leaf vein margin, while HLB has an asymmetrical yellowing around the vein.
+The most noticeable symptom of HLB is greening and stunting of the fruit, especially after ripening.
+</string>
+
+    <string name="Peach">BACTERIAL SPOT
+        Symptoms of this disease include fruit spots, leaf spots, and twig cankers. 
+Fruit symptoms include pitting, cracking, gumming, and watersoaked tissue, which can make the fruit more susceptible to brown rot, rhizopus, and other fungal infections.  
+Severe defoliation can result in reduced fruit size, and sunburn and cracking of fruit. Early defoliated trees are reduced in vigor and winter hardiness.
+Fruit symptoms of bacterial spot may be confused with peach scab, however scab spots are more circular, have a dark brown/greenish, fuzzy appearance.
+    </string>
+
+    <string name="Pepper">BELL BACTERIAL SPOT
+Leaf symptoms appear first on the undersides of leaves as small water-soaked areas.
+These spots enlarge up to 1/4 inch in diameter, turn dark brown, and are slightly raised. 
+On the upper leaf surface the spots are depressed with a brown border around a beige center.
+ Several lesions may coalesce, resulting in large necrotic areas, and large numbers of lesions can occur on leaf margins and tips where moisture accumulates. 
+Eventually the leaves yellow and drop off, increasing the chance for sunscald.
+</string>
+
+    <string name="Potato">EARLY BLIGHT
+    LATE BLIGHT
+    Foliar symptoms of early blight first appear as small, irregular to circular dark brown spots on the lower (older) leaves.
+These spots may range in size from a pinpoint to 1/8 inch in diameter. As the spots enlarge, they become restricted by leaf veins and take on an angular shape.
+ Early in the growing season, lesions on young, fully expanded, succulent leaves may be larger – up to ½ inch in diameter – and may, because of their size, be confused with late blight lesion.
+Leaf lesions are relatively easy to identify in the field because lesion development is characterized by a series of dark concentric rings alternating with bands of light tan tissue.
+A narrow band of chlorotic tissue often surrounds each lesion, and extensive chlorosis of infected foliage develops over time. Elongated, superficial brown or black lesions may also form on stems and petioles.
+    </string>
+
+    <string name="Raspberry">SEPTORIA LEAF SPOT
+        CANE AND LEAF RUST
+        caused by the fungus Septoria rubi, causes evenly-shaped lesions on blackberry canes and leaves, usually with a whitish centre and purple-brown margin. It does not attack raspberry plants. Damage is more severe following prolonged wet periods and control begins by encouraging foliage to dry quickly after rain, such as by avoiding training into bundles or excessively dense patches of foliage.
+    </string>
 </resources>
