@@ -65,21 +65,53 @@ public class Frag1 extends Fragment {
         ImageView Cherry = new ImageView(activity);
         Cherry.setImageResource(R.drawable.cherry);
         Cherry.setContentDescription("Cherry");
+        Blueberry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), Blue2.class);
+                startActivity(i);
+
+            }
+        });
         listView.addView(Cherry);
 
         ImageView Corn = new ImageView(activity);
         Corn.setImageResource(R.drawable.corn);
         Corn.setContentDescription("Corn");
+        Blueberry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), Blue2.class);
+                startActivity(i);
+
+            }
+        });
         listView.addView(Corn);
 
         ImageView Grapes = new ImageView(activity);
         Grapes.setImageResource(R.drawable.grapes);
         Grapes.setContentDescription("Grapes");
+        Blueberry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), Blue2.class);
+                startActivity(i);
+
+            }
+        });
         listView.addView(Grapes);
 
         ImageView Orange = new ImageView(activity);
         Orange.setImageResource(R.drawable.orange);
         Orange.setContentDescription("Orange");
+        Blueberry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), Blue2.class);
+                startActivity(i);
+
+            }
+        });
         listView.addView(Orange);
 
 /*
