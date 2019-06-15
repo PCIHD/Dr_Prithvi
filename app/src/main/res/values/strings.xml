@@ -3,8 +3,13 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
-    <string name="Tomato"> <b>APPLE SCAB</b>
-\n TOMATO EARLY BLIGHT
+    <string name="Tomato"> <b><i>1. TOMATO BACTERIAL SPOT</i></b>
+\n It is difficult to reliably distinguish bacterial spot from bacterial speck based on visual symptoms, especially in the early stages.
+Initial leaf symptoms are small, circular-to-irregular, dark lesions, which may be surrounded by a yellow halo.
+The lesions tend to concentrate on the leaf edges and tip and may increase in size to a diameter of 3-5 mm. Infected leaves may develop a scorched appearance.
+When spots are numerous, foliage turns yellow and eventually dies, leading to defoliation of the lower portion of the plant.
+
+TOMATO EARLY BLIGHT
 LEAVES:
 Initially small dark spots form on older foliage near the ground
 Leaf spots are round, brown and can grow up to half inch in diameter.
@@ -14,6 +19,8 @@ FRUIT:
 Fruit can be infected at any stage of maturity
 Fruit spots are leathery, black, with raised concentric ridges and generally occur near the stem
 Infected fruit may drop from the plant
+https://extension.umn.edu/diseases/early-blight-tomato
+
 </string>
 
     <string name="Apple"> APPLE SCAB
