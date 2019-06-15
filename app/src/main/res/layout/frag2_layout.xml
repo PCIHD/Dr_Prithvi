@@ -69,28 +69,30 @@
 
             <ImageView
                 android:id="@+id/bottom_img"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
                 android:layout_gravity="left"
-                android:src="@drawable/icn_chevron_up" />
+                android:src="@drawable/apple___healthy" />
 
             <TextView
                 android:id="@+id/bottom_var"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp"
                 android:layout_gravity="center"
+                android:fontFamily="sans-serif"
+                android:padding="16dp"
                 android:text="CLASSIFIED :- "
-                android:textSize="10sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/bottom_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp"
                 android:layout_gravity="center"
-                android:text=""
-                android:textSize="10sp" />
+                android:fontFamily="monospace"
+                android:padding="16dp"
+                android:text="apple___healthy"
+                android:textSize="16sp" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
