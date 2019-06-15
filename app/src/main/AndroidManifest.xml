@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".raspberry2"></activity>
+        <activity android:name=".scheme1"></activity>
+        <activity android:name=".raspberry2" />
         <activity android:name=".potato2" />
         <activity android:name=".pepper2" />
         <activity android:name=".peach2" />
