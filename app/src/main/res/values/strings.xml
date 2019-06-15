@@ -111,4 +111,20 @@ A narrow band of chlorotic tissue often surrounds each lesion, and extensive chl
         CANE AND LEAF RUST
         caused by the fungus Septoria rubi, causes evenly-shaped lesions on blackberry canes and leaves, usually with a whitish centre and purple-brown margin. It does not attack raspberry plants. Damage is more severe following prolonged wet periods and control begins by encouraging foliage to dry quickly after rain, such as by avoiding training into bundles or excessively dense patches of foliage.
     </string>
+
+    <string name="Scheme1"><b>1. Soil Health Card Scheme</b>\n
+Launched in 2015, the scheme has been introduced to assist State Governments to issue Soil Health Cards to all farmers in the country.  The Soil Health Cards provide information to farmers on nutrient status of their soil along with recommendation on appropriate dosage of nutrients to be applied for improving soil health and its fertility.
+\n\n</string>
+    <string name="Scheme2"><b>2. National Mission for Sustainable Agriculture (NMSA)</b>\n
+NMSA is one of the eight Missions under National Action Plan on Climate Change (NAPCC). It aims at promoting Sustainable Agriculture through climate change adaptation measures, enhancing agriculture productivity especially in rainfed areas focusing on integrated farming, soil health management, and synergizing resource conservation.
+NMSA as a programmatic intervention caters to Mission Deliverables that focuses mainly on conservation agriculture to make farm sector more productive, sustainable, remunerative and climate resilient by promoting location specific integrated/composite farming systems.
+\n\n</string>
+    <string name="Scheme3"><b>3. Neem Coated Urea (NCU)</b>\n
+This scheme is initiated to regulate use of urea, enhance availability of nitrogen to the crop and reduce cost of fertilizer application.  NCU slows down the release of fertilizer and makes it available to the crop in an effective manner. The entire quantity of domestically manufactured and imported urea is now neem coated.  It reduces the cost of cultivation and improves soil health management.
+\n\n</string>
+    <string name="Scheme4"><b>4. Pradhan Mantri Krishi Sinchai Yojana (PMKSY)</b>\n
+It was launched on 1st July, 2015 with the motto of ‘Har Khet Ko Paani’ for providing end-to end solutions in irrigation supply chain, viz. water sources, distribution network and farm level applications.
+PMKSY not only focuses on creating sources for assured irrigation, but also creating protective irrigation by harnessing rain water at micro level through ‘Jal Sanchay’ and ‘Jal Sinchan’.
+Micro irrigation is to be popularised to ensure ‘Per drop-More crop’. PMKSY adopts State level planning and projectised execution that allows States to draw up their own irrigation development based on District Irrigation Plans and State Irrigation Plans.
+\n\n</string>
 </resources>
