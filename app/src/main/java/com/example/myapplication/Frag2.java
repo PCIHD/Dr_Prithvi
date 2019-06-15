@@ -41,6 +41,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
+import org.tensorflow.lite.Interpreter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -69,6 +71,9 @@ public class Frag2 extends Fragment {
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
     private CameraCaptureSession cameraCaptureSessions;
+    private Interpreter tflite;
+    private List<String> labelList;
+
 
 
     private String cameraId;
