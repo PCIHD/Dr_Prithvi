@@ -5,6 +5,8 @@ package com.example.myapplication;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
+import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -36,12 +38,20 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.tensorflow.lite.Interpreter;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,17 +64,31 @@ public class Camera_Activity extends AppCompatActivity {
 
     private ImageButton btnCapture;
     private TextureView textureView;
-
-    //Check state orientation of output image
+    private static final int IMAGE_MEAN = 128;
+    private static final float IMAGE_STD = 128.0f;
+    private ByteBuffer imgData = null;
+    private Interpreter tflite;
+    private final Interpreter.Options tfliteOptions = new Interpreter.Options();
+    private List<String> labelList;
+    private String[] topLabels = null;
+    private String[] topConfidence = null;
+    private int DIM_IMG_SIZE_X = 160;
+    private int DIM_IMG_SIZE_Y = 160;
+    private int DIM_PIXEL_SIZE = 3;
+    private int intValues[];
+    private static final int RESULTS_TO_SHOW = 3;
+    private float[][] labelProbArray = new float[1][38];
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
-    static{
-        ORIENTATIONS.append(Surface.ROTATION_0,90);
-        ORIENTATIONS.append(Surface.ROTATION_90,0);
-        ORIENTATIONS.append(Surface.ROTATION_180,270);
-        ORIENTATIONS.append(Surface.ROTATION_270,180);
+    //Check state orientation of output image
+    static {
+        ORIENTATIONS.append(Surface.ROTATION_0, 90);
+        ORIENTATIONS.append(Surface.ROTATION_90, 0);
+        ORIENTATIONS.append(Surface.ROTATION_180, 270);
+        ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
 
     private String cameraId;
+    private Boolean quant = Boolean.FALSE;
     private CameraDevice cameraDevice;
     private CameraCaptureSession cameraCaptureSessions;
     private CaptureRequest.Builder captureRequestBuilder;
@@ -101,7 +125,20 @@ public class Camera_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.frag2_layout);
+        try{
+            tflite = new Interpreter(loadModelFile(), tfliteOptions);
+            labelList = loadLabelList();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+            imgData =
+                    ByteBuffer.allocateDirect(
+                            4 * DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y * DIM_PIXEL_SIZE);
+
+
+        imgData.order(ByteOrder.nativeOrder());
+
 
         textureView = (TextureView)findViewById(R.id.texture_View);
         //From Java 1.4 , you can use keyword 'assert' to check expression true or false
@@ -109,10 +146,18 @@ public class Camera_Activity extends AppCompatActivity {
         textureView.setSurfaceTextureListener(textureListener);
         Bottom_sheet_arrow = (ImageView) findViewById(R.id.bottom_sheet_arrow);
         btnCapture = (ImageButton)findViewById(R.id.capture);
+
+
         btnCapture.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                takePicture();
+            public void onClick(View v) {
+                Bitmap bitmap = takePicture();
+                convertBitmapToByteBuffer(bitmap);
+                try{
+                    tflite.run(imgData, labelProbArray);
+                }catch (Exception e1){
+                    e1.printStackTrace();
+                }
             }
         });
 
@@ -144,12 +189,14 @@ public class Camera_Activity extends AppCompatActivity {
                 }
         );
 
-    }
 
+
+    }
+/*
     private void takePicture() {
         if(cameraDevice == null)
             return;
-        CameraManager manager = (CameraManager)getSystemService(Context.CAMERA_SERVICE);
+        CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try{
             CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraDevice.getId());
             Size[] jpegSizes = null;
@@ -249,6 +296,7 @@ public class Camera_Activity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    */
 
     private void createCameraPreview() {
         try{
@@ -378,6 +426,53 @@ public class Camera_Activity extends AppCompatActivity {
         mBackgroundThread = new HandlerThread("Camera Background");
         mBackgroundThread.start();
         mBackgroundHandler = new Handler(mBackgroundThread.getLooper());
+    }
+    private List<String> loadLabelList() throws IOException {
+        List<String> labelList = new ArrayList<String>();
+        BufferedReader reader =
+                new BufferedReader(new InputStreamReader(this.getAssets().open("labels.txt")));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            labelList.add(line);
+        }
+        reader.close();
+        if(labelList ==null)
+            Toast.makeText(this,"List empty",Toast.LENGTH_LONG).show();
+        return labelList;
+    }
+    private void convertBitmapToByteBuffer(Bitmap bitmap) {
+        if (imgData == null) {
+            return;
+        }
+        imgData.rewind();
+        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+        // loop through all pixels
+        int pixel = 0;
+        for (int i = 0; i < DIM_IMG_SIZE_X; ++i) {
+            for (int j = 0; j < DIM_IMG_SIZE_Y; ++j) {
+                final int val = intValues[pixel++];
+                // get rgb values from intValues where each int holds the rgb values for a pixel.
+                // if quantized, convert each rgb value to a byte, otherwise to a float
+
+                imgData.putFloat((((val >> 16) & 0xFF)-IMAGE_MEAN)/IMAGE_STD);
+                imgData.putFloat((((val >> 8) & 0xFF)-IMAGE_MEAN)/IMAGE_STD);
+                imgData.putFloat((((val) & 0xFF)-IMAGE_MEAN)/IMAGE_STD);
+
+            }
+        }
+    }
+    private MappedByteBuffer loadModelFile() throws IOException {
+        AssetFileDescriptor fileDescriptor = getAssets().openFd("dr_prithvi.tflite");
+        FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
+        FileChannel fileChannel = inputStream.getChannel();
+        long startOffset = fileDescriptor.getStartOffset();
+        long declaredLength = fileDescriptor.getDeclaredLength();
+        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
+    }
+    private Bitmap takePicture() {
+        Bitmap bitmapTextureView = textureView.getBitmap();
+        bitmapTextureView = Bitmap.createScaledBitmap(bitmapTextureView,DIM_IMG_SIZE_X,DIM_IMG_SIZE_Y,false);
+        return bitmapTextureView;
     }
 }
 

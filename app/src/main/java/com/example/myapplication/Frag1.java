@@ -114,56 +114,7 @@ public class Frag1 extends Fragment {
         });
         listView.addView(Orange);
 
-        ImageView Peach = new ImageView(activity);
-        Peach.setImageResource(R.drawable.peach2);
-        Peach.setContentDescription("Peach");
-        Peach.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(), peach2.class);
-                startActivity(i);
 
-            }
-        });
-        listView.addView(Peach);
-        ImageView Pepper = new ImageView(activity);
-        Pepper.setImageResource(R.drawable.pepper);
-        Pepper.setContentDescription("Pepper");
-        Pepper.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(), pepper2.class);
-                startActivity(i);
-
-            }
-        });
-        listView.addView(Pepper);
-
-        ImageView Potato = new ImageView(activity);
-        Potato.setImageResource(R.drawable.potato);
-        Potato.setContentDescription("Potato");
-        Potato.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(), potato2.class);
-                startActivity(i);
-
-            }
-        });
-        listView.addView(Potato);
-
-        ImageView Raspberry = new ImageView(activity);
-        Raspberry.setImageResource(R.drawable.raspberry);
-        Raspberry.setContentDescription("Raspberry");
-        Raspberry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(), raspberry2.class);
-                startActivity(i);
-
-            }
-        });
-        listView.addView(Raspberry);
 
 
 
